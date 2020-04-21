@@ -108,49 +108,55 @@
     /* find all articles */
 
     const articles = document.querySelectorAll(optArticleSelector);
-
-    /* START LOOP: for every article: */
-
     for (let article of articles) {
       console.log(article);
     }
 
-    /* find tags wrapper */
+    /* START LOOP: for every article: */
 
-    const tagsList = article.querySelector(optArticleTagsSelector);
-    console.log(tagsList);
-    /* make html variable with empty string */
 
-    let html = '';
+    for (let article of articles) {
+      console.log(article);
 
-    /* get tags from data-tags attribute */
 
-    const articleTags = article.getAttribute('data-tags');
-    console.log(articleTags);
+      /* find tags wrapper */
 
-    /* split tags into array */
+      const tagsList = article.querySelector(optArticleTagsSelector);
+      console.log(tagsList);
 
-    const articleTagsArray = articleTags.split(' ');
-    console.log(articleTagsArray);
+      let html = '';
 
-    /* START LOOP: for each tag */
+      /* get tags from data-tags attribute */
 
-    for (let tag of articleTagsArray) {
-      console.log(tag);
-      /* generate HTML of the link */
+      const articleTags = article.getAttribute('data-tags');
+      console.log(articleTags);
 
-      const linkHTML = '<li><a href="#tag-"></a></li>';
-      console.log(linkHTML);
+      /* split tags into array */
+      const articleTagsArray = articleTags.split(' ');
+      console.log(articleTagsArray);
 
-      /* add generated code to html variable */
+      /* START LOOP: for each tag */
+
+      for (let tag of articleTagsArray) {
+        console.log(tag);
+        /* generate HTML of the link */
+
+        const linkHTML = '<li><a href="#' + tag + '"><span>' + tag + '</span></a></li>';
+        console.log(linkHTML);
+
+        /* add generated code to html variable */
+        html = html + linkHTML;
+      }
+      /* END LOOP: for each tag */
+
+      /* insert HTML of all the links into the tags wrapper */
+
+      /* END LOOP: for every article: */
     }
-    /* END LOOP: for each tag */
 
-    /* insert HTML of all the links into the tags wrapper */
-
-    /* END LOOP: for every article: */
   }
 
   generateTags();
+
 
 }
