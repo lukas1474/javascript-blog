@@ -42,7 +42,7 @@
 
   const optArticleSelector = '.post',
     optArticleTagsSelector = '.post-tags .list',
-    optArticleAuthoSelector = '.post-author',
+    optArticleAuthorSelector = '.post-author',
     optTitleSelector = '.post-title',
     optTagsListSelector = '.tags.list',
     optTitleListSelector = '.titles';
@@ -94,6 +94,28 @@
   }
 
   generateTitleLinks();
+
+
+
+
+  function calculateTagsParams(tags) {
+    const params = { min: 999999, max: 0 };
+
+    for (let tag in tags) {
+      console.log(tag + ' is used ' + tags[tag] + ' times');
+      if (tags[tag] > params.max) {
+        params.max = tags[tag];
+      }
+      if (tags[tag] < params.min) {
+        params.min = tags[tag];
+      }
+    }
+
+    return params;
+  }
+
+  calculateTagsParams();
+
 
 
 
@@ -161,19 +183,21 @@
 
     const tagList = document.querySelector('.tags');
 
+    const tagsParams = calculateTagsParams(allTags);
+    console.log('tagsParams:', tagsParams);
     /* [NEW] create variable for all links HTML code */
     let allTagsHTML = '';
 
     /* [NEW] START LOOP: for each tag in allTags: */
     for (let tag in allTags) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
-      const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '"><span>' + tag + ' (' + allTags[tag] + ') ' + '</span></a></li>';
-      console.log('tagLinkHTML:', tagLinkHTML);
+      allTagsHTML += '<a href="">' + tag + ' (' + allTags[tag] + ')</a>';
     }
     /* [NEW] END LOOP: for each tag in allTags: */
 
     /*[NEW] add HTML from allTagsHTML to tagList */
     tagList.innerHTML = allTagsHTML;
+
 
 
 
@@ -273,7 +297,7 @@
 
       /* find tags wrapper */
 
-      const authorList = article.querySelector(optArticleAuthoSelector);
+      const authorList = article.querySelector(optArticleAuthorSelector);
 
       let html = '';
 
@@ -286,7 +310,7 @@
       //const articleAuthorArray = articleAuthor();
 
       /* add generated code to html variable */
-      const linkHTML = '<a href="#' + authorList + '"><span>' + articleAuthor + '</span></a>';
+      const linkHTML = '<p><a href="#' + authorList + '"><span>' + articleAuthor + '</span></a>';
 
       html = html + linkHTML;
     }
