@@ -42,7 +42,7 @@
 
   const optArticleSelector = '.post',
     optArticleTagsSelector = '.post-tags .list',
-    optArticleAuthorSelector = '.post-author',
+    optArticleAuthorsSelector = '.post-author',
     optTitleSelector = '.post-title',
     optTagsListSelector = '.tags.list',
     optAuthorsListSelector = '.authors.list',
@@ -210,7 +210,8 @@
       /* [NEW] generate code of a link and add it to allTagsHTML */
 
       //'<a href="">' + tag + ' (' + allTags[tag] + ')</a>';
-      const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '"><span>' + tag + ' (' + allTags[tag] + ') ' + '</span></a></li>';
+      //const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '"><span>' + tag + ' (' + allTags[tag] + ') ' + '</span></a></li>';
+      const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
       console.log('tagLinkHTML:', tagLinkHTML);
 
       allTagsHTML += tagLinkHTML;
@@ -353,7 +354,7 @@
 
       /* find authors wrapper */
 
-      const authorsList = article.querySelector(optArticleAuthorSelector);
+      const authorsList = article.querySelector(optArticleAuthorsSelector);
 
       let html = '';
 
@@ -391,11 +392,12 @@
     let allAuthorsHTML = '';
 
     /* [NEW] START LOOP: for each tag in allTags: */
-    for (let author in allAuthors) {
+    for (let articleAuthors in allAuthors) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
 
       //'<a href="">' + tag + ' (' + allTags[tag] + ')</a>';
-      const authorLinkHTML = '<li><a class="' + calculateAuthorClass(allAuthors[author], authorsParams) + '" href="#author' + author + '"><span>' + author + ' (' + allAuthors[author] + ') ' + '</span></a></li>';
+      //const authorLinkHTML = '<li><a class="' + calculateAuthorClass(allAuthors[articleAuthors], authorsParams) + '" href="#author-' + articleAuthors + '"><span>' + articleAuthors + ' (' + allAuthors[articleAuthors] + ') ' + '</span></a></li>';
+      const authorLinkHTML = '<li><a class="' + calculateAuthorClass(allAuthors[articleAuthors], authorsParams) + '" href="#author-' + articleAuthors + '"><span>' + articleAuthors + '</span></a></li>';
       console.log('authorLinkHTML:', authorLinkHTML);
 
       allAuthorsHTML += authorLinkHTML;
@@ -474,7 +476,7 @@
 
     /* find all links to author */
 
-    const links = document.querySelectorAll('.post-author a, .list.authors a');
+    const links = document.querySelectorAll('.post-author a, .authors.list a');
 
     /* START LOOP: for each link */
     for (let link of links) {
